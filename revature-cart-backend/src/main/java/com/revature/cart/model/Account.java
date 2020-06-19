@@ -8,7 +8,7 @@ public class Account {
 
 	@Id
 	private int accountNumber;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn
 	private Customer customer;
 	private int availablePoints;

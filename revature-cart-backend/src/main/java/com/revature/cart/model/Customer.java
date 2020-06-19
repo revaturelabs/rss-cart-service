@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,9 +15,9 @@ public class Customer {
 
 	@Id
 	private int customerID;
-	@OneToMany(mappedBy = "account.customer")
+	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Account> accounts = new ArrayList<>();
-	@OneToMany(mappedBy = "cart.customer")
+	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
 	private List<Cart> carts = new ArrayList<>();
 
 	public Customer() {
