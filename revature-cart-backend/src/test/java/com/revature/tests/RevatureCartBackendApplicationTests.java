@@ -1,50 +1,37 @@
 package com.revature.tests;
 
-import java.util.List;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.revature.cart.dao.CartDao;
 import com.revature.cart.model.Cart;
-import com.revature.service.container.CartServiceContainer;
+import com.revature.service.CartService;
 
-@SpringBootTest
+@SpringBootTest(classes = Cart.class)
 class RevatureCartBackendApplicationTests {
 	
-	private CartServiceContainer csc;
+	@Mock
+	private CartService csc;
+	@Mock
+	private CartDao cdao;
 	
-	@Autowired
-	public RevatureCartBackendApplicationTests(CartServiceContainer csc) {
-		this.csc = csc;
-	}
-	
-	/**
-	 * @BeforeEach
-    public void setUp() throws Exception {
-        // clear user table
-        List<User> uList = userService.getAllUsers();
-        for(User u : uList) {
-            userService.deleteByID(u.getId());
-        }
-    }
-	 */
+	private Cart testCart;
 	
 	@BeforeEach
-	void setUp() throws Exception {
-		// clear cart list
-		List<Cart> cartList = csc.getAllCarts();
-//		for (Cart cart : cartList) {
-//			csc.deleteCartById(cart.getCartID());
-//		}
+	public void setupTests() {
+		if (this.testCart==null) {
+			this.testCart = new Cart(0, 0, null);
+		}
 	}
-	
-//	@AfterEach
-//	void tearDown() throws Exception {
-//		
-//	}
-	
 	
 	/**
 	 * we can use contextLoads for checking if anything is null
@@ -55,10 +42,14 @@ class RevatureCartBackendApplicationTests {
 	}
 	
 	@Test
-	void createCartTest() {
-		
+	public void createCartTest() {
+		when(cdao.save(testCart)).thenReturn(testCart);
 	}
 	
+	@Test
+	public void getCartTest() {
+		when(cdao.findById(0)).thenReturn(Optional.of(new Cart(0, 0, null)));
+	}
 	
 
 }
