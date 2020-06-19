@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.cart.model.Cart;
 
 @Repository
-public interface CartDao extends JpaRepository<Cart, Integer>{
-
+public interface CartDao extends JpaRepository<Cart, Integer> {
+	
 }

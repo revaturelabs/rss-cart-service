@@ -7,5 +7,5 @@ import com.revature.cart.model.CartItem;
 
 @Repository
 public interface CartItemDao extends JpaRepository<CartItem, Integer> {
-
+	
 }
