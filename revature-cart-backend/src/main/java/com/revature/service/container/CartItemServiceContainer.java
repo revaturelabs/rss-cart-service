@@ -1,4 +1,4 @@
-package com.revture.service.container;
+package com.revature.service.container;
 
 import java.util.List;
 

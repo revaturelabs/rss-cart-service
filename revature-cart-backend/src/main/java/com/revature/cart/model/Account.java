@@ -1,47 +1,71 @@
 package com.revature.cart.model;
 
-import javax.persistence.*;
-
-@Entity(name = "account")
-@Table
 public class Account {
+	private int accId;
+    private int userId;
+    private int accTypeId;
+	private int points;
 
-	@Id
-	private int accountNumber;
-	@ManyToOne
-	@JoinColumn
-	private Customer customer;
-	private int availablePoints;
-	
 	public Account() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public int getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(int accountID) {
-		this.accountNumber = accountID;
-	}
-
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public int getAvailablePoints() {
-		return availablePoints;
-	}
-
-	public void setAvailablePoints(int availablePoints) {
-		this.availablePoints = availablePoints;
 	}
 	
+	public Account(int accId, int userId, int accTypeId, int points) {
+		super();
+		this.accId = accId;
+		this.userId = userId;
+		this.accTypeId = accTypeId;
+		this.points = points;
+	}
 	
+	public Account(int userId, int accTypeId, int points) {
+		super();
+		this.userId = userId;
+		this.accTypeId = accTypeId;
+		this.points = points;
+	}
 	
+	public Account(int userId, int accTypeId) {
+		super();
+		this.userId = userId;
+		this.accTypeId = accTypeId;
+	}
+
+	public int getAccId() {
+		return accId;
+	}
+
+	public void setAccId(int accId) {
+		this.accId = accId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getAccTypeId() {
+		return accTypeId;
+	}
+
+	public void setAccTypeId(int accTypeId) {
+		this.accTypeId = accTypeId;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [accId=" + accId + ", userId=" + userId + ", accTypeId=" + accTypeId + ", points=" + points
+				+ "]";
+	}
 }

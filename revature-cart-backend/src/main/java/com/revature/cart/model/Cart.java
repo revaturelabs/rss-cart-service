@@ -1,58 +1,94 @@
 package com.revature.cart.model;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 @Entity(name = "cart")
 @Table
 public class Cart {
-
 	@Id
-	@GeneratedValue
-	private int cartID;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
-	private Customer customer;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int cartId;
 	
+	private int userId;
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<CartItem> cartItems;
+
 	public Cart() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(int cartID, Customer customer) {
+	public Cart(int cartId, int userId, List<CartItem> cartItems) {
 		super();
-		this.cartID = cartID;
-		this.customer = customer;
+		this.cartId = cartId;
+		this.userId = userId;
+		this.cartItems = cartItems;
 	}
 
 	public int getCartID() {
-		return cartID;
+		return cartId;
 	}
 
 	public void setCartID(int cartID) {
-		this.cartID = cartID;
+		this.cartId = cartID;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	@Override
-	public String toString() {
-		return "Cart [cartID=" + cartID + ", customer=" + customer + "]";
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+	
+	public void addCartItem(CartItem cartItem) {
+		addCartItem(cartItem, true);
+	}
+	
+	public void addCartItem(CartItem cartItem, boolean reciprocate) {
+		if (cartItem != null) {
+			if (this.cartItems.contains(cartItem)) {
+				this.cartItems.set(this.cartItems.indexOf(cartItem), cartItem);
+			} else {
+				this.cartItems.add(cartItem);
+			}
+			if (reciprocate) {
+				cartItem.setCart(this, false);
+			}
+		}
+	}
+	
+	public void removeCartItem(CartItem cartItem) {
+		this.cartItems.remove(cartItem);
+		cartItem.setCart(null);
+	}
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cartID;
+		result = prime * result + cartId;
 		return result;
 	}
 
+	// only checks cartId
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -62,9 +98,13 @@ public class Cart {
 		if (getClass() != obj.getClass())
 			return false;
 		Cart other = (Cart) obj;
-		if (cartID != other.cartID)
+		if (cartId != other.cartId)
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Cart [cartID=" + cartId + ", userId=" + userId + ", cartItems=" + cartItems + "]";
+	}
 }

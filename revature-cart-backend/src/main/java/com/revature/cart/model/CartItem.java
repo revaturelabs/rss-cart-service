@@ -1,7 +1,9 @@
 package com.revature.cart.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,28 +12,27 @@ import javax.persistence.Table;
 @Entity(name = "cart_item")
 @Table
 public class CartItem {
-
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartItemId;
-	@ManyToOne
-	@JoinColumn
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CART_ID")
 	private Cart cart;
-	@ManyToOne
-	@JoinColumn
-	private Product product;
+	
+	private int productId;
+	
 	private int quantity;
 	
 	public CartItem() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public CartItem(int cartItemId, Cart cart, Product product, int quantity) {
+	public CartItem(int cartItemId, Cart cart, int productId, int quantity) {
 		super();
 		this.cartItemId = cartItemId;
 		this.cart = cart;
-		this.product = product;
+		this.productId = productId;
 		this.quantity = quantity;
 	}
 
@@ -48,15 +49,21 @@ public class CartItem {
 	}
 
 	public void setCart(Cart cart) {
+		setCart(cart, true);
+	}
+	
+	public void setCart(Cart cart, boolean reciprocate) {
 		this.cart = cart;
+		if (reciprocate && cart != null)
+			cart.addCartItem(this, false);
 	}
 
-	public Product getProduct() {
-		return product;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public int getQuantity() {
@@ -66,18 +73,13 @@ public class CartItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	@Override
-	public String toString() {
-		return "CartItem [cartItemId=" + cartItemId + ", cart=" + cart + ", product=" + product + ", quantity="
-				+ quantity + "]";
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cartItemId;
+		result = prime * result + ((cart == null) ? 0 : cart.hashCode());
+		result = prime * result + productId;
 		return result;
 	}
 
@@ -90,9 +92,19 @@ public class CartItem {
 		if (getClass() != obj.getClass())
 			return false;
 		CartItem other = (CartItem) obj;
-		if (cartItemId != other.cartItemId)
+		if (cart == null) {
+			if (other.cart != null)
+				return false;
+		} else if (!cart.equals(other.cart))
+			return false;
+		if (productId != other.productId)
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "CartItem [cartItemId=" + cartItemId + ", cart=" + cart + ", productId=" + productId + ", quantity="
+				+ quantity + "]";
+	}
 }
