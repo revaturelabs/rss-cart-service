@@ -6,6 +6,17 @@ import com.revature.cart.model.Cart;
 
 public interface CartService {
 	
+	// CREATE
+	
+	/**
+	 * Saves the cart item to the database
+	 * @param item The object of the model passed in to save
+	 * @return if saved, returns the saved item, if not returns null
+	 */
+	public Cart createCart(Cart cart);
+	
+	// READ
+	
 	/**
 	 * Gets all the cart items
 	 * @return List<Cart> the list of items retrieved by JPA
@@ -19,23 +30,20 @@ public interface CartService {
 	 */
 	public Cart getCartById(int id);
 	
+	// UPDATE
 	/**
-	 * Saves the cart item to the database
-	 * @param item The object of the model passed in to save
-	 * @return if saved, returns the saved item, if not returns null
+	 * Updates a specific cart item by id
+	 * @param id the id of the item to be updated
+	 * @return 
 	 */
-	public Cart createCart(Cart cart);
+	public Cart updateCartById(int id);
+	public Cart updateCart(Cart cart);
 	
+	// DELETE
 	/**
 	 * Deletes the cart item
 	 * @param id the id of the item to be deleted
 	 */
 	public void deleteCartById(int id);
-	
-	/**
-	 * Updates a specific cart item by id
-	 * @param id the id of the item to be updated
-	 */
-	public void updateCartById(int id);
-
+	void deleteCart(Cart cart);
 }
