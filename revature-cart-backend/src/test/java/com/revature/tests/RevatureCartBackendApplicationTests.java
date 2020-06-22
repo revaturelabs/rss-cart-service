@@ -16,9 +16,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.revature.cart.dao.CartDao;
 import com.revature.cart.model.Cart;
 import com.revature.cart.model.CartItem;
-import com.revature.service.container.CartServiceContainer;
+import com.revature.cart.service.container.CartServiceContainer;
 
-@WebAppConfiguration
 @SpringBootTest
 @ContextConfiguration(classes = {CartDao.class})
 class RevatureCartBackendApplicationTests {
@@ -31,7 +30,7 @@ class RevatureCartBackendApplicationTests {
 	
 	@BeforeEach
 	public void setupTests() {
-		if (this.cart==null) {
+		if (this.cart == null) {
 			this.cart = new Cart();
 			this.cart.setCartID(0);
 			this.cart.setCartItems(new ArrayList<CartItem>());

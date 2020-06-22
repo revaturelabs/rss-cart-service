@@ -1,10 +1,11 @@
-package com.revature.service;
-
+package com.revature.cart.service;
 import java.util.List;
+import java.util.Optional;
 
 import com.revature.cart.model.Cart;
-
-public interface CartService {
+import com.revature.cart.model.CartItem;
+public interface CartItemService {
+	
 	
 	// CREATE
 	
@@ -13,37 +14,51 @@ public interface CartService {
 	 * @param item The object of the model passed in to save
 	 * @return if saved, returns the saved item, if not returns null
 	 */
-	public Cart createCart(Cart cart);
+	public CartItem createCartItem(CartItem item);
 	
 	// READ
-	
+
 	/**
 	 * Gets all the cart items
-	 * @return List<Cart> the list of items retrieved by JPA
+	 * @return List<CartItem> the list of items retrieved by JPA
 	 */
-	public List<Cart> getAllCarts();
+	public List<CartItem> getAllCartItems();
 	
 	/**
 	 * Gets a cart item based on a given ID
 	 * @param id the id of the cart item
 	 * @return the cart item returned by JPA
 	 */
-	public Cart getCartById(int id);
+	public CartItem getCartItemById(int id);
+	
 	
 	// UPDATE
+	
 	/**
 	 * Updates a specific cart item by id
 	 * @param id the id of the item to be updated
 	 * @return 
 	 */
-	public Cart updateCartById(int id);
-	public Cart updateCart(Cart cart);
+	public CartItem updateCartItemById(int id);
 	
-	// DELETE
+	public CartItem updateCartItem(CartItem item);
+	
+	// DELETE 
+	
 	/**
 	 * Deletes the cart item
 	 * @param id the id of the item to be deleted
 	 */
-	public void deleteCartById(int id);
-	void deleteCart(Cart cart);
+	public void deleteCartItemById(int id);
+	
+	public void deleteCartItem(CartItem item);
+
+	
+
+	
+
+	
+
+
+
 }

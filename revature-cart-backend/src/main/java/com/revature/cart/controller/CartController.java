@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.cart.model.Cart;
-import com.revature.service.container.CartServiceContainer;
+import com.revature.cart.service.container.CartServiceContainer;
 
 @RestController
 public class CartController {
