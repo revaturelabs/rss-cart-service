@@ -2,39 +2,53 @@ package com.revature.service.container;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.revature.cart.dao.CartItemDao;
 import com.revature.cart.model.CartItem;
 import com.revature.service.CartItemService;
 
 public class CartItemServiceContainer implements CartItemService {
+	private CartItemDao cid;
+	
+	@Autowired
+	public CartItemServiceContainer(CartItemDao cid) {
+		this.cid = cid;
+	}
 
 	@Override
 	public List<CartItem> getAllCartItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return cid.findAll();
 	}
 
 	@Override
 	public CartItem getCartItemById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return cid.findById(id).get();
 	}
 
 	@Override
 	public CartItem createCartItem(CartItem item) {
-		// TODO Auto-generated method stub
-		return null;
+		return cid.save(item);
 	}
 
 	@Override
 	public void deleteCartItemById(int id) {
-		// TODO Auto-generated method stub
-
+		cid.deleteById(id);
+	}
+	
+	@Override
+	public void deleteCartItem(CartItem item) {
+		cid.delete(item);
 	}
 
 	@Override
-	public void updateCartItemById(int id) {
-		// TODO Auto-generated method stub
-
+	public CartItem updateCartItemById(int id) {
+		CartItem item = cid.findById(id).get();
+		return cid.save(item);
 	}
 
+	@Override
+	public CartItem updateCartItem(CartItem item) {
+		return cid.save(item);
+	}
 }

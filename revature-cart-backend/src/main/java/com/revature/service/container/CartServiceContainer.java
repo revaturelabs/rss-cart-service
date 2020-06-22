@@ -17,35 +17,40 @@ public class CartServiceContainer implements CartService {
 		super();
 		this.cdao = cdao;
 	}
-
+	
+	@Override
+	public Cart createCart(Cart cart) {
+		return cdao.save(cart);
+	}
+	
 	@Override
 	public List<Cart> getAllCarts() {
-		// TODO Auto-generated method stub
-		return null;
+		return cdao.findAll();
 	}
 
 	@Override
 	public Cart getCartById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return cdao.findById(id).get();
 	}
 
 	@Override
-	public Cart createCart(Cart cart) {
-		// TODO Auto-generated method stub
+	public Cart updateCartById(int id) {
+		Cart cart = cdao.findById(id).get();
+		return cdao.save(cart);
+	}
+	
+	@Override
+	public Cart updateCart(Cart cart) {
 		return cdao.save(cart);
 	}
 
 	@Override
 	public void deleteCartById(int id) {
-		// TODO Auto-generated method stub
-
+		cdao.deleteById(id);
 	}
-
+	
 	@Override
-	public void updateCartById(int id) {
-		// TODO Auto-generated method stub
-
+	public void deleteCart(Cart cart) {
+		cdao.delete(cart);
 	}
-
 }
