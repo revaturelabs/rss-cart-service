@@ -21,7 +21,7 @@ public class Cart {
 	@Column(name = "user_id")
 	private int userId;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
 
 	public Cart() {
