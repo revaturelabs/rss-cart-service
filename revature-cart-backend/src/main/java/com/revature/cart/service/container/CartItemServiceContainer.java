@@ -1,13 +1,15 @@
-package com.revature.service.container;
+package com.revature.cart.service.container;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.cart.dao.CartItemDao;
 import com.revature.cart.model.CartItem;
-import com.revature.service.CartItemService;
+import com.revature.cart.service.CartItemService;
 
+@Service
 public class CartItemServiceContainer implements CartItemService {
 	private CartItemDao cid;
 	
