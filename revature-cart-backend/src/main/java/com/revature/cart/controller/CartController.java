@@ -16,32 +16,66 @@ import com.revature.cart.service.container.CartServiceContainer;
 
 @RestController
 public class CartController {
+	
+	/**
+	 * Link to the service container service layer
+	 */
 	private CartServiceContainer csc;
+	
+	/**
+	 * Constructor for this controller 
+	 * @param csc the service container passed in
+	 */
 	@Autowired
 	public CartController(CartServiceContainer csc) {
 		this.csc = csc;
 	}
 	
+	/**
+	 * Saves the cart object to the database
+	 * @param cart the cart object to be saved
+	 * @return the cart that was just saved, if save was unsuccessful it will return null
+	 */
 	@PostMapping("/cart")
 	public Cart createCart(@RequestBody Cart cart) {
 		return csc.createCart(cart);
 	}
 	
+	/**
+	 * Retrieves an individual cart by id
+	 * @param userId the identification of user 
+	 * @return a List<Cart> all the carts associated with given user id
+	 * 
+	 */
 	@GetMapping("/carts/user/{id}")
-	public List<Cart> getCartsByUserId(@PathVariable("id") int id) {
-		return csc.getCartsByUserId(id);
+	public List<Cart> getCartsByUserId(@PathVariable("id") int userId) {
+		return csc.getCartsByUserId(userId);
 	}
 	
+	/**
+	 * Retrieves unique cart based on cart id
+	 * @param id the id of the cart
+	 * @return the individual cart by id
+	 */
 	@GetMapping("/cart/id/{id}")
 	public Cart getCartById(@PathVariable("id") int id) {
 		return csc.getCartById(id);
 	}
 	
+	/**
+	 * Updates an already existing cart
+	 * @param cart the cart to update
+	 * @return the updated cart
+	 */
 	@PutMapping("/cart")
 	public Cart updateCart(@RequestBody Cart cart) {
 		return csc.updateCart(cart);
 	}
 	
+	/**
+	 * Deletes a cart from the database
+	 * @param id the id of the cart to delete
+	 */
 	@DeleteMapping("/cart/id/{id}")
 	public void deleteCartById(@PathVariable("id") int id) {
 		csc.deleteCartById(id);
