@@ -1,8 +1,6 @@
 package com.revature.cart.service;
 import java.util.List;
-import java.util.Optional;
 
-import com.revature.cart.model.Cart;
 import com.revature.cart.model.CartItem;
 public interface CartItemService {
 	
