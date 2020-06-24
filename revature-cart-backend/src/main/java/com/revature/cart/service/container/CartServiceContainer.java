@@ -28,6 +28,11 @@ public class CartServiceContainer implements CartService {
 	public List<Cart> getAllCarts() {
 		return cdao.findAll();
 	}
+	
+	@Override
+	public List<Cart> getCartsByUserId(int id) {
+		return cdao.findByUserId(id);
+	}
 
 	@Override
 	public Cart getCartById(int id) {
