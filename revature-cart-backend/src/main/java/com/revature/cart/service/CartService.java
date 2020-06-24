@@ -23,6 +23,14 @@ public interface CartService {
 	 */
 	public List<Cart> getAllCarts();
 	
+	// READ
+	
+	/**
+	 * TODO
+	 */
+	public List<Cart> getCartsByUserId(int id);
+	
+	
 	/**
 	 * Gets a cart item based on a given ID
 	 * @param id the id of the cart item
@@ -46,4 +54,6 @@ public interface CartService {
 	 */
 	public void deleteCartById(int id);
 	void deleteCart(Cart cart);
+
+	
 }
