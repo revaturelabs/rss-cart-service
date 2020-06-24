@@ -45,6 +45,7 @@ public class CartController {
 	 * Retrieves an individual cart by id
 	 * @param userId the identification of user 
 	 * @return a List<Cart> all the carts associated with given user id
+	 * 
 	 */
 	@GetMapping("/carts/user/{id}")
 	public List<Cart> getCartsByUserId(@PathVariable("id") int userId) {
