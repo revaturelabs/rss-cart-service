@@ -19,7 +19,6 @@ public class CartItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cartItemId;
 	
-	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CART_ID")
 	@JsonBackReference

@@ -25,7 +25,6 @@ public class Cart {
 	private int userId;
 	@Column(name = "name")
 	private String name;
-	@JsonManagedReference
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<CartItem> cartItems;
@@ -41,12 +40,12 @@ public class Cart {
 		this.cartItems = cartItems;
 	}
 
-	public int getCartID() {
+	public int getCartId() {
 		return cartId;
 	}
 
-	public void setCartID(int cartID) {
-		this.cartId = cartID;
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
 	public int getUserId() {
@@ -112,6 +111,8 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [cartID=" + cartId + ", userId=" + userId + ", cartItems=" + cartItems + "]";
+		return "Cart [cartId=" + cartId + ", userId=" + userId + ", name=" + name + ", cartItems=" + cartItems + "]";
 	}
+
+	
 }

@@ -11,91 +11,117 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.revature.cart.model.Cart;
 import com.revature.cart.model.CartItem;
 
 @SpringBootTest
 class CartItemServiceContainerTest {
-	
+
 	@Autowired
 	CartItemServiceContainer cisc;
 	
-	@BeforeEach
-	public void setUp() throws Exception {
-		// clear the table before we start each test
-		List<CartItem> cartItemList = cisc.getAllCartItems();
-		
-		for(CartItem c : cartItemList) {
-			cisc.deleteCartItemById(c.getCartItemId());
-		}
-	}
-	
-	
-	/**
-	 * 	THIS IS A CART ITEM    use @JsonBackReference
-	 * 	private int cartItemId;
-		private Cart cart;
-		private int productId;
-		private int quantity;
-		
-		THIS IS CART  use @JsonManageReference
-		private int cartId;
-		private int userId;
-		private String name;
-		private List<CartItem> cartItems;
-	 */
+	@Autowired
+	CartServiceContainer csc;
 
 	@Test
 	void test_createCartItem() {
-		
+
 		CartItem cartItem = new CartItem();
-		//CartItem cartItem1 = new CartItem();
-		List<CartItem> ci_L = new ArrayList<>();
-		
+		List<CartItem> cartItemListEmpty = new ArrayList<>();
+
 		Cart cart = new Cart();
-		cart.setCartID(1);
+		cart.setCartId(1);
 		cart.setUserId(1);
-		//cart.setName("need a name ?");
-		cart.setCartItems(ci_L);
-		
-		
-		cartItem.setCartItemId(1);
+		// cart.setName("need a name ?");
+		cart.setCartItems(cartItemListEmpty);
+
+
+		//cartItem.setCartItemId(1);
 		cartItem.setCart(cart);
 		cartItem.setProductId(1);
 		cartItem.setQuantity(1);
-		
+
 		cisc.createCartItem(cartItem);
-		List<CartItem> ciFromDB = cisc.getAllCartItems();
-		assertEquals(1, ciFromDB.size());
+		System.out.println("\n\nHelloWorld! " + cart.toString());
+		System.out.println("\n\nHelloWorld! " + cart.getCartId());
+		
+		
+		List<CartItem> cartItemListFromDB = new ArrayList<>();
+		//CartItem cartItem1 = cisc.getCartItemById(cartItem.getCartItemId());
+		
+		// fill List with getCartItemById (the Cart's id)
+		cartItemListFromDB.add(cisc.getCartItemById(cart.getCartId()));
+
+		assertEquals(1, cartItemListFromDB.size());
 	}
-	
+
+//	@Test
+//	void test_deleteCartItem() {
+//
+//		CartItem cartItem = new CartItem();
+//		List<CartItem> cartItemListEmpty = new ArrayList<>();
+//
+//		Cart cart = new Cart();
+//		cart.setCartId(1);
+//		cart.setUserId(1);
+//		// cart.setName("need a name ?");
+//		cart.setCartItems(cartItemListEmpty);
+//
+//		cartItem.setCartItemId(1);
+//		cartItem.setCart(cart);
+//		cartItem.setProductId(1);
+//		cartItem.setQuantity(1);
+//
+//		cisc.createCartItem(cartItem);
+//		List<CartItem> ciFromDB = new ArrayList<>();
+//		ciFromDB.add(cisc.getCartItemById(cart.getCartId()));
+//		int before = ciFromDB.size();
+//		
+//		cisc.deleteCartItemById(cartItem.getCartItemId());
+//		assertEquals(before, (ciFromDB.size() + 1));
+//	}
 	
 	@Test
 	void test_deleteCartItem() {
-		
+
 		CartItem cartItem = new CartItem();
-		//CartItem cartItem1 = new CartItem();
-		List<CartItem> ci_L = new ArrayList<>();
-		
+		List<CartItem> cartItemListEmpty = new ArrayList<>();
+
 		Cart cart = new Cart();
-		cart.setCartID(1);
+		cart.setCartId(1);
 		cart.setUserId(1);
-		//cart.setName("need a name ?");
-		cart.setCartItems(ci_L);
+		// cart.setName("need a name ?");
+		cart.setCartItems(cartItemListEmpty);
+
+		//cartItem.setCartItemId(1);
+		csc.createCart(cart);
 		
 		
-		cartItem.setCartItemId(1);
 		cartItem.setCart(cart);
 		cartItem.setProductId(1);
 		cartItem.setQuantity(1);
-		
+
 		cisc.createCartItem(cartItem);
-		List<CartItem> ciFromDB = cisc.getAllCartItems();
+		List<CartItem> ciFromDB = new ArrayList<>();
+		ciFromDB.add(cisc.getCartItemById(cart.getCartId()));
+		int before = ciFromDB.size();
+		
 		cisc.deleteCartItemById(cartItem.getCartItemId());
-		assertThat(cartItem).isNull();
+		assertEquals(before, (ciFromDB.size() + 1));
 	}
 
 }
+
+
+
+
+
+
+
+
+
 
 
 
