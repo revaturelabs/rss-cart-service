@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity(name = "cart")
 @Table
@@ -23,6 +26,7 @@ public class Cart {
 	@Column(name = "name")
 	private String name;
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<CartItem> cartItems;
 
 	public Cart() {

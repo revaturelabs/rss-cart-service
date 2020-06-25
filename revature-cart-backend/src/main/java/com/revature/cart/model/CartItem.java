@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name = "cart_item")
 @Table
 public class CartItem {
@@ -18,6 +21,7 @@ public class CartItem {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CART_ID")
+	@JsonBackReference
 	private Cart cart;
 	
 	private int productId;
