@@ -27,6 +27,7 @@
 		    <artifactId>jacoco-maven-plugin</artifactId>
 		    <version>0.8.1</version>
 		</dependency>
+<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<dependency>
 		    <groupId>io.springfox</groupId>
@@ -40,6 +41,8 @@
 		    <version>2.9.2</version>
 		</dependency>
 		
+=======
+>>>>>>> master
 				
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
