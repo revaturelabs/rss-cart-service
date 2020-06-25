@@ -30,6 +30,13 @@ public interface CartItemService {
 	 */
 	public CartItem getCartItemById(int id);
 	
+	/**
+	 * Gets a cart item based on a given Product ID
+	 * @param productId - the ID of the product
+	 * @return the cart items with the associated product ID
+	 */
+	public List<CartItem> getCartItemsByProductId(int id);
+	
 	public List<CartItem> getCartItemsByCartId(int cartId);
 	
 	// UPDATE
