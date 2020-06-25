@@ -31,7 +31,7 @@ class RevatureCartBackendApplicationTests {
 	public void setupTests() {
 		if (this.cart == null) {
 			this.cart = new Cart();
-			this.cart.setCartID(0);
+			this.cart.setCartId(0);
 			this.cart.setCartItems(new ArrayList<CartItem>());
 			this.cart.setUserId(0);
 		}
