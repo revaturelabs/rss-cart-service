@@ -1,9 +1,10 @@
 package com.revature.cart.service;
+
 import java.util.List;
 
 import com.revature.cart.model.CartItem;
+
 public interface CartItemService {
-	
 	
 	// CREATE
 	
@@ -29,6 +30,7 @@ public interface CartItemService {
 	 */
 	public CartItem getCartItemById(int id);
 	
+	public List<CartItem> getCartItemsByCartId(int cartId);
 	
 	// UPDATE
 	
@@ -50,13 +52,4 @@ public interface CartItemService {
 	public void deleteCartItemById(int id);
 	
 	public void deleteCartItem(CartItem item);
-
-	
-
-	
-
-	
-
-
-
 }
