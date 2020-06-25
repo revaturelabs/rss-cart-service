@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.cart.model.CartItem;
@@ -17,6 +18,7 @@ import com.revature.cart.service.container.CartItemServiceContainer;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/cartitem")
 public class CartItemController {
 	
 	private CartItemServiceContainer cisc;
@@ -26,27 +28,28 @@ public class CartItemController {
 		this.cisc = cisc;
 	}
 	
-	@PostMapping("/cartItem")
+	@PostMapping
 	public CartItem createCartItem(@RequestBody CartItem ci) {
+		System.out.println(ci.getCart().getCartId());
 		return cisc.createCartItem(ci);
 	}
 	
-	@GetMapping("cartItem/{id}")
+	@GetMapping("/{id}")
 	public CartItem getCartItemById(@PathVariable("id") int id) {
 		return cisc.getCartItemById(id);
 	}
 	
-	@GetMapping("cartItems")
-	public List<CartItem> getAllCartItems() {
-		return cisc.getAllCartItems();
+	@GetMapping("s/{id}")
+	public List<CartItem> getAllCartItems(@PathVariable("id") int cartId) {
+		return cisc.getCartItemsByCartId(cartId);
 	}
 	
-	@PutMapping("cartItem")
+	@PutMapping
 	public CartItem updateCartItem(@RequestBody CartItem ci) {
 		return cisc.updateCartItem(ci);
 	}
 	
-	@DeleteMapping("cartItem/{id}")
+	@DeleteMapping("/{id}")
 	public void deleteCartItemById(@PathVariable("id") int id) {
 		cisc.deleteCartItemById(id);
 	}

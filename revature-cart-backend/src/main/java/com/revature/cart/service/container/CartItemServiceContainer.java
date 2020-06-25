@@ -53,4 +53,9 @@ public class CartItemServiceContainer implements CartItemService {
 	public CartItem updateCartItem(CartItem item) {
 		return cid.save(item);
 	}
+	
+	@Override
+	public List<CartItem> getCartItemsByCartId(int cartId) {
+		return cid.findByCartCartId(cartId);
+	}
 }
