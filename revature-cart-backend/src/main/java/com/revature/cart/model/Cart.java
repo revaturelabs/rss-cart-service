@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -40,11 +39,11 @@ public class Cart {
 		this.cartItems = cartItems;
 	}
 
-	public int getCartID() {
+	public int getCartId() {
 		return cartId;
 	}
 
-	public void setCartID(int cartID) {
+	public void setCartId(int cartID) {
 		this.cartId = cartID;
 	}
 
@@ -86,6 +85,14 @@ public class Cart {
 		this.cartItems = cartItems;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,6 +118,7 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [cartID=" + cartId + ", userId=" + userId + ", cartItems=" + cartItems + "]";
+		return "Cart [cartId=" + cartId + ", userId=" + userId + ", name=" + name + ", cartItems=" + cartItems + "]";
 	}
+	
 }
