@@ -107,7 +107,7 @@ public class CartItem {
 
 	@Override
 	public String toString() {
-		return "CartItem [cartItemId=" + cartItemId + ", cart=" + cart + ", productId=" + productId + ", quantity="
+		return "CartItem [cartItemId=" + cartItemId + ", cart=" + cart.getCartId() + ", productId=" + productId + ", quantity="
 				+ quantity + "]";
 	}
 }
