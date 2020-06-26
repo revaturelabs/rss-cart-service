@@ -51,7 +51,7 @@ public class CartItemController {
 		return cisc.updateCartItem(ci);
 	}
 	
-	@DeleteMapping("cartitem/{id}")
+	@DeleteMapping("/cartitem/{id}")
 	public void deleteCartItemById(@PathVariable("id") int id) {
 		cisc.deleteCartItemById(id);
 	}
