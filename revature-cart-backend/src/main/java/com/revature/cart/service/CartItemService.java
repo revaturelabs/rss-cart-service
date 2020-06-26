@@ -30,12 +30,12 @@ public interface CartItemService {
 	 */
 	public CartItem getCartItemById(int id);
 	
-	/**
-	 * Gets a cart item based on a given Product ID
-	 * @param productId - the ID of the product
-	 * @return the cart items with the associated product ID
-	 */
-	public List<CartItem> getCartItemsByProductId(int id);
+//	/**
+//	 * Gets a cart item based on a given Product ID
+//	 * @param productId - the ID of the product
+//	 * @return the cart items with the associated product ID
+//	 */
+//	public List<CartItem> getCartItemsByProductId(int id);
 	
 	public List<CartItem> getCartItemsByCartId(int cartId);
 	
@@ -59,4 +59,6 @@ public interface CartItemService {
 	public void deleteCartItemById(int id);
 	
 	public void deleteCartItem(CartItem item);
+
+	public CartItem getCartItemsByCartIdAndProductId(int cartId, int productId);
 }

@@ -3,20 +3,20 @@ package com.revature.cart.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.cart.model.Cart;
 import com.revature.cart.service.container.CartServiceContainer;
 
 @RestController
-@RequestMapping("/cart")
+@CrossOrigin
 public class CartController {
 	
 	/**
@@ -38,7 +38,7 @@ public class CartController {
 	 * @param cart the cart object to be saved
 	 * @return the cart that was just saved, if save was unsuccessful it will return null
 	 */
-	@PostMapping
+	@PostMapping("/cart")
 	public Cart createCart(@RequestBody Cart cart) {
 		return csc.createCart(cart);
 	}
@@ -49,7 +49,7 @@ public class CartController {
 	 * @return a List<Cart> all the carts associated with given user id
 	 * 
 	 */
-	@GetMapping("s/{id}")
+	@GetMapping("/carts/{id}")
 	public List<Cart> getCartsByUserId(@PathVariable("id") int userId) {
 		return csc.getCartsByUserId(userId);
 	}
@@ -59,7 +59,7 @@ public class CartController {
 	 * @param id the id of the cart
 	 * @return the individual cart by id
 	 */
-	@GetMapping("/{id}")
+	@GetMapping("/cart/{id}")
 	public Cart getCartById(@PathVariable("id") int id) {
 		return csc.getCartById(id);
 	}
@@ -69,7 +69,7 @@ public class CartController {
 	 * @param cart the cart to update
 	 * @return the updated cart
 	 */
-	@PutMapping
+	@PutMapping("/cart")
 	public Cart updateCart(@RequestBody Cart cart) {
 		return csc.updateCart(cart);
 	}
@@ -78,7 +78,7 @@ public class CartController {
 	 * Deletes a cart from the database
 	 * @param id the id of the cart to delete
 	 */
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/cart/{id}")
 	public void deleteCartById(@PathVariable("id") int id) {
 		csc.deleteCartById(id);
 	}
