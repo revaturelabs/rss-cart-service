@@ -10,4 +10,6 @@ import com.revature.cart.model.CartItem;
 @Repository
 public interface CartItemDao extends JpaRepository<CartItem, Integer> {
 	public List<CartItem> findByCartCartId(int cartId);
+
+	public List<CartItem> findByProductId(int productId);
 }

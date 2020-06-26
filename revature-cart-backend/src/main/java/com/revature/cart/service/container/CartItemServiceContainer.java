@@ -58,4 +58,9 @@ public class CartItemServiceContainer implements CartItemService {
 	public List<CartItem> getCartItemsByCartId(int cartId) {
 		return cid.findByCartCartId(cartId);
 	}
+
+	@Override
+	public List<CartItem> getCartItemsByProductId(int productId) {
+		return cid.findByProductId(productId);
+	}
 }
