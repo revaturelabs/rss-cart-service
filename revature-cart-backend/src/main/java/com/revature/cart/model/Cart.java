@@ -32,11 +32,12 @@ public class Cart {
 		super();
 	}
 
-	public Cart(int cartId, int userId, List<CartItem> cartItems) {
+	public Cart(int cartId, int userId, List<CartItem> cartItems, String name) {
 		super();
 		this.cartId = cartId;
 		this.userId = userId;
 		this.cartItems = cartItems;
+		this.name = name;
 	}
 
 	public int getCartId() {
