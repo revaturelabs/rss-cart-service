@@ -24,8 +24,8 @@ public class Cart {
 	private int userId;
 	@Column(name = "name")
 	private String name;
-	@JsonManagedReference
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<CartItem> cartItems;
 
 	public Cart() {
