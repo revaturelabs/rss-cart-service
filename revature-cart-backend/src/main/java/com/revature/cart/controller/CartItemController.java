@@ -1,5 +1,6 @@
 package com.revature.cart.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,14 @@ public class CartItemController {
 	
 	@PostMapping
 	public CartItem createCartItem(@RequestBody CartItem ci) {
-		System.out.println(ci.getCart().getCartId());
+		ArrayList<CartItem> list1 = (ArrayList<CartItem>) cisc.getCartItemsByProductId(ci.getProductId());
+		for (CartItem cartItem : list1) {
+		  if (cartItem.getCart().getCartId() == ci.getCart().getCartId()) {
+		    cartItem.setQuantity(ci.getQuantity() + cartItem.getQuantity());
+		    return cisc.updateCartItem(cartItem);
+		  }
+		}
+					
 		return cisc.createCartItem(ci);
 	}
 	
