@@ -1,6 +1,5 @@
 package com.revature.cart.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.cart.model.CartItem;
@@ -19,7 +17,6 @@ import com.revature.cart.service.container.CartItemServiceContainer;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cartitem")
 public class CartItemController {
 	
 	private CartItemServiceContainer cisc;
@@ -29,56 +26,34 @@ public class CartItemController {
 		this.cisc = cisc;
 	}
 	
-	@PostMapping
+	@PostMapping("/cartitem")
 	public CartItem createCartItem(@RequestBody CartItem ci) {
-		ArrayList<CartItem> list1 = (ArrayList<CartItem>) cisc.getCartItemsByProductId(ci.getProductId());
-		for (CartItem cartItem : list1) {
-		  if (cartItem.getCart().getCartId() == ci.getCart().getCartId()) {
-		    cartItem.setQuantity(ci.getQuantity() + cartItem.getQuantity());
-		    return cisc.updateCartItem(cartItem);
-		  }
+		CartItem other = cisc.getCartItemsByCartIdAndProductId(ci.getCart().getCartId(), ci.getProductId());
+		if (other != null) {
+			other.setQuantity(ci.getQuantity() + other.getQuantity());
+		    return cisc.updateCartItem(other);
 		}
-					
 		return cisc.createCartItem(ci);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/cartitem/{id}")
 	public CartItem getCartItemById(@PathVariable("id") int id) {
 		return cisc.getCartItemById(id);
 	}
 	
-	@GetMapping("s/{id}")
+	@GetMapping("/cartitems/{id}")
 	public List<CartItem> getAllCartItems(@PathVariable("id") int cartId) {
 		return cisc.getCartItemsByCartId(cartId);
 	}
 	
-	@PutMapping
+	@PutMapping("/cartitem")
 	public CartItem updateCartItem(@RequestBody CartItem ci) {
 		return cisc.updateCartItem(ci);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("cartitem/{id}")
 	public void deleteCartItemById(@PathVariable("id") int id) {
 		cisc.deleteCartItemById(id);
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
