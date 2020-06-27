@@ -135,21 +135,4 @@ class RevatureCartBackendApplicationTests {
 	public void getAllCartsServiceTest() {
 		assertNotNull(csc.getAllCarts());
 	}
-	
-	@Test
-	public void createCartControllerTest() {
-		
-	}
-	
-	@Test
-	public void getCartControllerTest() {
-		
-	}
-	
-	@Test
-	public void getAllCartsControllerTest() {
-		
-	}
-	
-
 }
