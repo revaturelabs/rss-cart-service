@@ -25,11 +25,6 @@ public class CartServiceContainer implements CartService {
 	}
 	
 	@Override
-	public List<Cart> getAllCarts() {
-		return cdao.findAll();
-	}
-	
-	@Override
 	public List<Cart> getCartsByUserId(int id) {
 		return cdao.findByUserId(id);
 	}
@@ -37,12 +32,6 @@ public class CartServiceContainer implements CartService {
 	@Override
 	public Cart getCartById(int id) {
 		return cdao.findById(id).get();
-	}
-
-	@Override
-	public Cart updateCartById(int id) {
-		Cart cart = cdao.findById(id).get();
-		return cdao.save(cart);
 	}
 	
 	@Override
@@ -53,10 +42,5 @@ public class CartServiceContainer implements CartService {
 	@Override
 	public void deleteCartById(int id) {
 		cdao.deleteById(id);
-	}
-	
-	@Override
-	public void deleteCart(Cart cart) {
-		cdao.delete(cart);
 	}
 }

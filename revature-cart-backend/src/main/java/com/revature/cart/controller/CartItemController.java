@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.cart.model.CartItem;
 import com.revature.cart.service.container.CartItemServiceContainer;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @CrossOrigin
 @RestController
 public class CartItemController {
@@ -27,6 +30,9 @@ public class CartItemController {
 	}
 	
 	@PostMapping("/cartitem")
+	@ApiOperation(value = "Create CartItem", notes = "Saves the CartItem object to the database. "
+			+ "If a CartItem with a matching Cart and Product ID already exists in the database, "
+			+ "the existing CartItem will add the passed CartItem's quantity to its own.", response = CartItem.class)
 	public CartItem createCartItem(@RequestBody CartItem ci) {
 		CartItem other = cisc.getCartItemsByCartIdAndProductId(ci.getCart().getCartId(), ci.getProductId());
 		if (other != null) {
@@ -37,22 +43,26 @@ public class CartItemController {
 	}
 	
 	@GetMapping("/cartitem/{id}")
-	public CartItem getCartItemById(@PathVariable("id") int id) {
+	@ApiOperation(value = "Get CartItem by CartItem ID", notes = "Gets the CartItem object based on the CartItem ID", response = CartItem.class)
+	public CartItem getCartItemById(@ApiParam(value = "CartItem ID", required = true) @PathVariable("id") int id) {
 		return cisc.getCartItemById(id);
 	}
 	
 	@GetMapping("/cartitems/{id}")
-	public List<CartItem> getAllCartItems(@PathVariable("id") int cartId) {
+	@ApiOperation(value = "Get all CartItems by Cart ID", notes = "Returns all CartItems that have the matching Cart by Cart ID", response = CartItem.class)
+	public List<CartItem> getAllCartItems(@ApiParam(value = "Cart ID", required = true) @PathVariable("id") int cartId) {
 		return cisc.getCartItemsByCartId(cartId);
 	}
 	
 	@PutMapping("/cartitem")
-	public CartItem updateCartItem(@RequestBody CartItem ci) {
+	@ApiOperation(value = "Update CartItem", notes = "Updates the CartItem object in the database", response = CartItem.class)
+	public CartItem updateCartItem(@ApiParam(value = "CartItem", required = true) @RequestBody CartItem ci) {
 		return cisc.updateCartItem(ci);
 	}
 	
 	@DeleteMapping("/cartitem/{id}")
-	public void deleteCartItemById(@PathVariable("id") int id) {
+	@ApiOperation(value = "Delete CartItem", notes = "Deletes the CartItem object from the database based on CartItem ID")
+	public void deleteCartItemById(@ApiParam(value = "CartItem ID", required = true) @PathVariable("id") int id) {
 		cisc.deleteCartItemById(id);
 	}
 	
