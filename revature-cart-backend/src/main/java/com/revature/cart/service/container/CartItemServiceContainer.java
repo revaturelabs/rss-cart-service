@@ -20,11 +20,6 @@ public class CartItemServiceContainer implements CartItemService {
 	}
 
 	@Override
-	public List<CartItem> getAllCartItems() {
-		return cid.findAll();
-	}
-
-	@Override
 	public CartItem getCartItemById(int id) {
 		return cid.findById(id).get();
 	}
@@ -38,17 +33,6 @@ public class CartItemServiceContainer implements CartItemService {
 	public void deleteCartItemById(int id) {
 		cid.deleteById(id);
 	}
-	
-	@Override
-	public void deleteCartItem(CartItem item) {
-		cid.delete(item);
-	}
-
-	@Override
-	public CartItem updateCartItemById(int id) {
-		CartItem item = cid.findById(id).get();
-		return cid.save(item);
-	}
 
 	@Override
 	public CartItem updateCartItem(CartItem item) {
@@ -58,6 +42,11 @@ public class CartItemServiceContainer implements CartItemService {
 	@Override
 	public List<CartItem> getCartItemsByCartId(int cartId) {
 		return cid.findByCartCartId(cartId);
+	}
+	
+	@Override
+	public List<CartItem> getAllCartItems() {
+		return cid.findAll();
 	}
 
 	@Override
