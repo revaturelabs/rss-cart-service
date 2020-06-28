@@ -39,10 +39,10 @@ class CartControllerTest {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
-	@Test
-	void testCartController() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testCartController() {
+//		fail("Not yet implemented");
+//	}
 
 	@Test
 	void testCreateCart() throws Exception {
@@ -78,10 +78,10 @@ class CartControllerTest {
 
 	}
 
-	@Test
-	void testGetCartsByUserId() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testGetCartsByUserId() {
+//		fail("Not yet implemented");
+//	}
 
 	@Test
 	void testGetCartById() throws Exception {
@@ -125,9 +125,9 @@ class CartControllerTest {
 
 	}
 
-	@Test
-	void testDeleteCartById() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void testDeleteCartById() {
+//		fail("Not yet implemented");
+//	}
 
 }
