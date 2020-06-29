@@ -16,12 +16,6 @@ public interface CartItemService {
 	public CartItem createCartItem(CartItem item);
 	
 	// READ
-
-	/**
-	 * Gets all the cart items
-	 * @return List<CartItem> the list of items retrieved by JPA
-	 */
-	public List<CartItem> getAllCartItems();
 	
 	/**
 	 * Gets a cart item based on a given ID
@@ -30,24 +24,23 @@ public interface CartItemService {
 	 */
 	public CartItem getCartItemById(int id);
 	
-//	/**
-//	 * Gets a cart item based on a given Product ID
-//	 * @param productId - the ID of the product
-//	 * @return the cart items with the associated product ID
-//	 */
-//	public List<CartItem> getCartItemsByProductId(int id);
-	
 	public List<CartItem> getCartItemsByCartId(int cartId);
+
+	public CartItem getCartItemsByCartIdAndProductId(int cartId, int productId);
+	
+	/**
+	 * Gets all the cart items
+	 * @return List<CartItem> the list of items retrieved by JPA
+	 */
+	public List<CartItem> getAllCartItems();
 	
 	// UPDATE
 	
 	/**
-	 * Updates a specific cart item by id
-	 * @param id the id of the item to be updated
+	 * Updates a specific cart item
+	 * @param item The object of the model passed in to update
 	 * @return 
 	 */
-	public CartItem updateCartItemById(int id);
-	
 	public CartItem updateCartItem(CartItem item);
 	
 	// DELETE 
@@ -57,8 +50,5 @@ public interface CartItemService {
 	 * @param id the id of the item to be deleted
 	 */
 	public void deleteCartItemById(int id);
-	
-	public void deleteCartItem(CartItem item);
 
-	public CartItem getCartItemsByCartIdAndProductId(int cartId, int productId);
 }

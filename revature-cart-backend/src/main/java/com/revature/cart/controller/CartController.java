@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.cart.model.Cart;
 import com.revature.cart.service.container.CartServiceContainer;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @RestController
 @CrossOrigin
 public class CartController {
@@ -39,18 +42,19 @@ public class CartController {
 	 * @return the cart that was just saved, if save was unsuccessful it will return null
 	 */
 	@PostMapping("/cart")
-	public Cart createCart(@RequestBody Cart cart) {
+	@ApiOperation(value = "Create Cart", notes = "Saves the Cart object to the database", response = Cart.class)
+	public Cart createCart(@ApiParam(value = "Cart object", required = true) @RequestBody Cart cart) {
 		return csc.createCart(cart);
 	}
 	
 	/**
-	 * Retrieves an individual cart by id
+	 * Retrieves a list of carts with the matching User id
 	 * @param userId the identification of user 
 	 * @return a List<Cart> all the carts associated with given user id
-	 * 
 	 */
 	@GetMapping("/carts/{id}")
-	public List<Cart> getCartsByUserId(@PathVariable("id") int userId) {
+	@ApiOperation(value = "Get Carts by User Id", notes = "Retrieves a list of Carts with the matching User ID", response = Cart.class)
+	public List<Cart> getCartsByUserId(@ApiParam(value = "User ID", required = true) @PathVariable("id") int userId) {
 		return csc.getCartsByUserId(userId);
 	}
 	
@@ -60,7 +64,8 @@ public class CartController {
 	 * @return the individual cart by id
 	 */
 	@GetMapping("/cart/{id}")
-	public Cart getCartById(@PathVariable("id") int id) {
+	@ApiOperation(value = "Get Cart by Cart Id", notes = "Retrieves an individual Cart by Cart ID", response = Cart.class)
+	public Cart getCartById(@ApiParam(value = "Cart ID", required = true) @PathVariable("id") int id) {
 		return csc.getCartById(id);
 	}
 	
@@ -70,7 +75,8 @@ public class CartController {
 	 * @return the updated cart
 	 */
 	@PutMapping("/cart")
-	public Cart updateCart(@RequestBody Cart cart) {
+	@ApiOperation(value = "Update Cart", notes = "Updates an already existing Cart based on Cart ID", response = Cart.class)
+	public Cart updateCart(@ApiParam(value = "Cart object", required = true) @RequestBody Cart cart) {
 		return csc.updateCart(cart);
 	}
 	
@@ -79,7 +85,8 @@ public class CartController {
 	 * @param id the id of the cart to delete
 	 */
 	@DeleteMapping("/cart/{id}")
-	public void deleteCartById(@PathVariable("id") int id) {
+	@ApiOperation(value = "Delete Cart", notes = "Deletes a Cart from the database based on Cart ID")
+	public void deleteCartById(@ApiParam(value = "Cart ID", required = true) @PathVariable("id") int id) {
 		csc.deleteCartById(id);
 	}
 }

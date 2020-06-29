@@ -18,14 +18,6 @@ public interface CartService {
 	// READ
 	
 	/**
-	 * Gets all the cart items
-	 * @return List<Cart> the list of items retrieved by JPA
-	 */
-	public List<Cart> getAllCarts();
-	
-	// READ
-	
-	/**
 	 * TODO
 	 */
 	public List<Cart> getCartsByUserId(int id);
@@ -44,7 +36,6 @@ public interface CartService {
 	 * @param id the id of the item to be updated
 	 * @return 
 	 */
-	public Cart updateCartById(int id);
 	public Cart updateCart(Cart cart);
 	
 	// DELETE
@@ -53,7 +44,4 @@ public interface CartService {
 	 * @param id the id of the item to be deleted
 	 */
 	public void deleteCartById(int id);
-	void deleteCart(Cart cart);
-
-	
 }
