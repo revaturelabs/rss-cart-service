@@ -1,6 +1,8 @@
 package com.revature.cart.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -18,8 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,11 +44,6 @@ class CartControllerTest {
 	private CartServiceContainer cartService;
 
 	private ObjectMapper mapper = new ObjectMapper();
-
-//	@Test
-//	void testCartController() {
-//		fail("Not yet implemented");
-//	}
 
 	@Test
 	void testCreateCart() throws Exception {
@@ -78,10 +79,27 @@ class CartControllerTest {
 
 	}
 
-//	@Test
-//	void testGetCartsByUserId() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	void testGetCartsByUserId() throws Exception {
+		
+		Cart cart = new Cart();
+		cart.setCartId(1);
+		cart.setUserId(1);
+		cart.setName("my Test Cart");
+		List<CartItem> cartItemListEmpty = new ArrayList<>();
+		cart.setCartItems(cartItemListEmpty);
+		
+		List<Cart> cartsFromDB = new ArrayList<>();
+		cartsFromDB.add(cart);
+
+
+		String outputJson = mapper.writeValueAsString(cartsFromDB);
+
+		Mockito.when(cartService.getCartsByUserId(cart.getCartId())).thenReturn(cartsFromDB);
+
+		this.mockMvc.perform(get("/carts/1")).andDo(print()).andExpect(status().isOk())
+				.andExpect(content().json(outputJson));
+	}
 
 	@Test
 	void testGetCartById() throws Exception {
@@ -125,9 +143,31 @@ class CartControllerTest {
 
 	}
 
-//	@Test
-//	void testDeleteCartById() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	void testDeleteCartById() throws Exception {
+		
+		Cart cart = new Cart();
+		cart.setCartId(1);
+		//cart.setUserId(1);
+		//cart.setName("my Test Cart");
+		List<CartItem> cartItemListEmpty = new ArrayList<>();
+		cart.setCartItems(cartItemListEmpty);
+
+		String outputJson = mapper.writeValueAsString(cart);
+		
+		doNothing().when(cartService).deleteCartById(Mockito.anyInt());
+		
+		
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/cart/1");
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		
+		
+        MockHttpServletResponse response = result.getResponse();
+		
+		verify(cartService).deleteCartById(Mockito.anyInt());
+		assertEquals(response.getStatus(), 200);
+		assertEquals(response.getContentAsString(), "");
+	}
 
 }
