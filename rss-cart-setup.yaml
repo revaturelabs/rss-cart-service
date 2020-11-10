@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rss-cart-deployment
+  labels:
+    app: rss-cart
+spec:
+  replicas: 1
+  minReadySeconds: 20
+  selector:
+    matchLabels:
+      app: rss-cart
+  template:
+    metadata:
+      labels:
+        app: rss-cart
+    spec:
+      containers:
+      - name: rss-cart
+        image: {yourdockerhub}/rss-cart:latest
+        ports:
+        - containerPort: 9999
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 9999
+          initialDelaySeconds: 20
+          periodSeconds: 20
+          failureThreshold: 5
+        startupProbe:
+          httpGet:
+            path: /actuator/health
+            port: 9999
+          initialDelaySeconds: 15
+          periodSeconds: 3
+          failureThreshold: 5
+          
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rss-cart-service
+spec:
+  selector:
+    app: rss-cart
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9999
+      targetPort: 9999
+      
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: rss-cart-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /cart(.+)
+        backend:
+          serviceName: rss-cart
+          servicePort: 9999
