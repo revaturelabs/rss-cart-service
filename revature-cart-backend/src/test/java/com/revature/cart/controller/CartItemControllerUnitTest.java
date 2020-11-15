@@ -29,10 +29,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.cart.model.Cart;
 import com.revature.cart.model.CartItem;
 import com.revature.cart.service.container.CartItemServiceContainer;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebMvcTest(CartItemController.class)
- class CartItemControllerUnitTest {
+//@RunWith(SpringJUnit4ClassRunner.class)
+// @WebMvcTest(CartItemController.class)
+@SpringBootTest
+public class CartItemControllerUnitTest {
 	
 	@Autowired
 	private MockMvc mvc;
