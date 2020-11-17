@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: rss-cart
-        image: {yourdockerhub}/rss-cart:latest
+        image: 855430746673.dkr.ecr.us-east-1.amazonaws.com/matt-oberlies-00000916-rss-cart:latest
         ports:
         - containerPort: 9999
         livenessProbe:
