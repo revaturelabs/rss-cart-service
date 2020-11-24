@@ -32,10 +32,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.cart.model.Cart;
 import com.revature.cart.model.CartItem;
 import com.revature.cart.service.container.CartServiceContainer;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(CartController.class)
-class CartControllerTest {
+//@RunWith(SpringRunner.class)
+//@WebMvcTest(CartController.class)
+@SpringBootTest
+public class CartControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -46,7 +48,7 @@ class CartControllerTest {
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Test
-	void testCreateCart() throws Exception {
+	public void testCreateCart() throws Exception {
 
 		// CREATE BODY REQUEST
 		Cart cart = new Cart();
@@ -80,7 +82,7 @@ class CartControllerTest {
 	}
 
 	@Test
-	void testGetCartsByUserId() throws Exception {
+	public void testGetCartsByUserId() throws Exception {
 		
 		Cart cart = new Cart();
 		cart.setCartId(1);
@@ -102,7 +104,7 @@ class CartControllerTest {
 	}
 
 	@Test
-	void testGetCartById() throws Exception {
+	public void testGetCartById() throws Exception {
 
 		Cart cart = new Cart();
 		cart.setCartId(1);
@@ -120,7 +122,7 @@ class CartControllerTest {
 	}
 
 	@Test
-	void testUpdateCart() throws Exception {
+	public void testUpdateCart() throws Exception {
 
 		// UPDATE
 		Cart cart2 = new Cart();
@@ -144,7 +146,7 @@ class CartControllerTest {
 	}
 
 	@Test
-	void testDeleteCartById() throws Exception {
+	public void testDeleteCartById() throws Exception {
 		
 		Cart cart = new Cart();
 		cart.setCartId(1);

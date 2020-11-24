@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rss-cart-service-deployment
+  labels:
+    app: rss-cart-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rss-cart-service
+  template:
+    metadata:
+      labels:
+        app: rss-cart-service
+    spec:
+      containers:
+      - name: rss-cart-service
+        image: baronvonfroglok/rss-cart-service:latest
+        ports:
+        - containerPort: 9999
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 9999
+          initialDelaySeconds: 20
+          periodSeconds: 20
